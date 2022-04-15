@@ -3,6 +3,7 @@ package br.com.diegochueri.inspect.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -18,11 +19,16 @@ public class Transacao {
 	private String bancoDeDestino;
 	private String agenciaDeDestino;
 	private String contaDeDestino;
-	private double valor;
+	private String valor;
 	private LocalDateTime dataHora;
+	private LocalDateTime dataHoraDaInclusao;
 	
-	public void pegaArquivo() {
-		
+	public static String erroCampoVazio(List<Integer> linhasFaltandoDados) {
+		return ("As linhas " + linhasFaltandoDados + " não foram adicionadas por estarem campos incompletos.");
+	}
+	
+	public static Object erroDatasDiferentes(List<Integer> linhasComDatasDiferentes) {
+		return ("As linhas " + linhasComDatasDiferentes + " não foram adicionadas por estarem com datas divergentes.");
 	}
 	
 	public String getBancoDeOrigem() {
@@ -61,11 +67,11 @@ public class Transacao {
 	public void setContaDeDestino(String record) {
 		this.contaDeDestino = record;
 	}
-	public double getValor() {
+	public String getValor() {
 		return valor;
 	}
-	public void setValor(double valor) {
-		this.valor = valor;
+	public void setValor(String record) {
+		this.valor = record;
 	}
 	public LocalDateTime getDataHora() {
 		return dataHora;
@@ -73,4 +79,14 @@ public class Transacao {
 	public void setDataHora(LocalDateTime record) {
 		this.dataHora = record;
 	}
+
+	public LocalDateTime getDataHoraDaInclusao() {
+		return dataHoraDaInclusao;
+	}
+
+	public void setDataHoraDaInclusao(LocalDateTime dataHoraDaInclusao) {
+		this.dataHoraDaInclusao = dataHoraDaInclusao;
+	}
+
+
 }

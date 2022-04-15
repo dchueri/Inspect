@@ -47,19 +47,49 @@
         role="alert"
         style="width: fit-content; margin: 0 auto"
       ></div>
+      <div
+        th:text="${erroNoUpload}"
+        class="alert alert-danger d-flex align-items-center"
+        role="alert"
+        style="width: fit-content; margin: 0 auto"
+      ></div>
+      <div
+        th:text="${erroCampoVazio}"
+        class="alert alert-danger d-flex align-items-center"
+        role="alert"
+        style="width: fit-content; margin: 0 auto"
+      ></div>
+            <div
+        th:text="${erroDatasDiferentes}"
+        class="alert alert-danger d-flex align-items-center"
+        role="alert"
+        style="width: fit-content; margin: 0 auto"
+      ></div>
     </div>
     <script defer>
-      const divVazia = document.querySelector("body > div > div");
-
-      if (divVazia.textContent.length === 0) {
-        divVazia.style.background = "none";
-        divVazia.style.border = "none";
+      const divSucesso = document.querySelector("body > div > div");
+      if (divSucesso.textContent.length === 0) {
+        divSucesso.style.background = "none";
+        divSucesso.style.border = "none";
       }
+      
+      const divFalhou = document.querySelector("body > div:nth-child(1) > div.alert.alert-danger.d-flex.align-items-center")
+	  if (divFalhou.textContent.length === 0) {
+		  divFalhou.style.background = "none";
+		  divFalhou.style.border = "none";
+	  }
+	  
+	  const erroDados = document.querySelector("body > div > div:nth-child(5)")
+	  if (erroDados.textContent.length === 0) {
+		  erroDados.style.background = "none";
+		  erroDados.style.border = "none";
+	  }
+	  
+	  const erroDatas = document.querySelector("body > div > div:nth-child(6)")
+	  if (erroDatas.textContent.length === 0) {
+		  erroDatas.style.background = "none";
+		  erroDatas.style.border = "none";
+	  }
     </script>
-    <div>
-        <div th:each="transacao : ${transacoes}">
-    		<div th:text="${transacao.bancoDeOrigem}"></div>
-   		</div>
-    </div>
   </body>
 </html>

@@ -1,5 +1,7 @@
 package br.com.diegochueri.inspect.repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,4 +15,7 @@ import br.com.diegochueri.inspect.model.Transacao;
 
 @Repository
 public interface TransacaoRepository extends JpaRepository<Transacao, Long>{
+
+	List<Transacao> findByDataHoraDaInclusao(LocalDateTime dataHoraDaInclusao);
+
 }
