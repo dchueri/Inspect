@@ -20,7 +20,7 @@ public class Transacao {
 	private String agenciaDeDestino;
 	private String contaDeDestino;
 	private String valor;
-	private LocalDateTime dataHora;
+	private LocalDateTime data;
 	private LocalDateTime dataHoraDaInclusao;
 	
 	public static String erroCampoVazio(List<Integer> linhasFaltandoDados) {
@@ -73,11 +73,11 @@ public class Transacao {
 	public void setValor(String record) {
 		this.valor = record;
 	}
-	public LocalDateTime getDataHora() {
-		return dataHora;
+	public LocalDateTime getData() {
+		return data;
 	}
-	public void setDataHora(LocalDateTime record) {
-		this.dataHora = record;
+	public void setData(LocalDateTime record) {
+		this.data = record;
 	}
 
 	public LocalDateTime getDataHoraDaInclusao() {

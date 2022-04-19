@@ -86,7 +86,7 @@ public class TransacaoController {
 					transacao.setAgenciaDeDestino(record[4]);
 					transacao.setContaDeDestino(record[5]);
 					transacao.setValor(record[6]);
-					transacao.setDataHora(LocalDateTime.parse(record[7]));
+					transacao.setData(LocalDateTime.parse(record[7]));
 					transacao.setDataHoraDaInclusao(LocalDateTime.now());					
 					contador++;
 					for (int i = 0; i < 7; i++) {
@@ -107,15 +107,16 @@ public class TransacaoController {
 			}
 			LocalDateTime dataHoraDaInclusao = transacoes.get(0).getDataHoraDaInclusao();
 			System.out.println(transacoes.get(0).getDataHoraDaInclusao().toLocalDate());
-			List<Transacao> transacoesEncontradas = transacaoRepository.findByDataHoraDaInclusao(dataHoraDaInclusao);
-			System.out.println("------------------>" + transacoesEncontradas);
+			LocalDate data = LocalDate.parse("2022-01-01");
+			transacaoRepository.findByData(data);
+			System.out.println("------------------>" + transacaoRepository.findByData(data));
 			
-			LocalDate dataCorreta = transacoes.get(0).getDataHora().toLocalDate();
+			LocalDate dataCorreta = transacoes.get(0).getData().toLocalDate();
 			List<Integer> linhasComDatasDiferentes = new ArrayList<Integer>();
 			int contadorDeLinhas = 0;
 			for (int i = 0; i < transacoes.size(); i++) {
 				contadorDeLinhas++;
-				LocalDate dataComparada = transacoes.get(i).getDataHora().toLocalDate();
+				LocalDate dataComparada = transacoes.get(i).getData().toLocalDate();
 				if (dataCorreta.equals(dataComparada) == false) {
 					contadorDeLinhas++;
 					linhasComDatasDiferentes.add(contadorDeLinhas);

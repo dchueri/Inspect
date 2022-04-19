@@ -16,6 +16,5 @@ import br.com.diegochueri.inspect.model.Transacao;
 @Repository
 public interface TransacaoRepository extends JpaRepository<Transacao, Long>{
 
-	List<Transacao> findByDataHoraDaInclusao(LocalDateTime dataHoraDaInclusao);
-
+	List<Transacao> findByData(LocalDate data);
 }
