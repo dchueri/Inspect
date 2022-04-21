@@ -21,6 +21,7 @@ import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -48,7 +49,7 @@ public class TransacaoController {
 	
 	@GetMapping("/historico")
 	public String historico(Model model){	
-		List<Transacao> transacoes = transacaoRepository.findAll();
+		List<Transacao> transacoes = transacaoRepository.findAll(Sort.by("dataDaTransacao"));
 		model.addAttribute("transacoes", transacoes);
 		return "historico";
 	}
@@ -108,10 +109,8 @@ public class TransacaoController {
 			}
 			LocalDate dataCorreta = transacoes.get(0).getDataDaTransacao();
 			List<LocalDate> dataDaTransacao = transacaoRepository.findByDataDaTransacao();
-			Boolean existeDataRepetida = false;
 			for (int i = 0; i < dataDaTransacao.size(); i++) {
 				if (dataDaTransacao.get(i).isEqual(dataCorreta)) {
-					existeDataRepetida = true;
 					throw new Error("O arquivo desse dia já foi adicionado");
 				}
 			}
@@ -128,7 +127,7 @@ public class TransacaoController {
 					transacoes.remove(i);
 				}
 			}
-			if (linhasComDatasDiferentes.isEmpty() == false) {
+			if (!linhasComDatasDiferentes.isEmpty()) {
 				model.addAttribute("erroDatasDiferentes", Transacao.erroDatasDiferentes(linhasComDatasDiferentes));
 			}
 			

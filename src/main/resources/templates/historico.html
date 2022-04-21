@@ -13,16 +13,38 @@
       text-align: center;
       display: grid;
       justify-content: center;
-      align-items: center;
     "
   >
     <div>
-      <h1>HISTÓRICO DE TRANSAÇÕES</h1>
+      <h1 style="padding: 1em;">IMPORTAÇÕES REALIZADAS</h1>
     </div>
-    <div>
-        <div th:each="transacao : ${transacoes}">
-    		<div th:text="${transacao.bancoDeOrigem}"></div>
-   		</div>
+    <div class="card mb-3" style="height: fit-content;">
+      <table class="table table-striped" style="margin-bottom: 0px;">
+        <thead>
+          <tr>
+            <th scope="col">DATA TRANSAÇÕES</th>
+            <th scope="col">DATA IMPORTAÇÃO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="transacao : ${transacoes}">
+            <td>
+              <span
+                th:text="${#temporals.format(transacao.dataDaTransacao, 'dd/MM/yyyy')}"
+              >
+                DATA TRANSAÇÕES
+              </span>
+            </td>
+            <td>
+              <span
+                th:text="${#temporals.format(transacao.dataHoraDaInclusao, 'dd-MM-yyyy - HH:mm:ss')}"
+              >
+                DATA IMPORTAÇÃO
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </body>
 </html>
