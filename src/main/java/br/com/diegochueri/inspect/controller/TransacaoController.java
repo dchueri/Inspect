@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -86,7 +87,7 @@ public class TransacaoController {
 					transacao.setAgenciaDeDestino(record[4]);
 					transacao.setContaDeDestino(record[5]);
 					transacao.setValor(record[6]);
-					transacao.setData(LocalDateTime.parse(record[7]));
+					transacao.setDataDaTransacao(LocalDateTime.parse(record[7]));
 					transacao.setDataHoraDaInclusao(LocalDateTime.now());					
 					contador++;
 					for (int i = 0; i < 7; i++) {
@@ -105,18 +106,22 @@ public class TransacaoController {
 			if (linhasFaltandoDados.isEmpty() == false) {
 				model.addAttribute("erroCampoVazio", Transacao.erroCampoVazio(linhasFaltandoDados));
 			}
-			LocalDateTime dataHoraDaInclusao = transacoes.get(0).getDataHoraDaInclusao();
-			System.out.println(transacoes.get(0).getDataHoraDaInclusao().toLocalDate());
-			LocalDate data = LocalDate.parse("2022-01-01");
-			transacaoRepository.findByData(data);
-			System.out.println("------------------>" + transacaoRepository.findByData(data));
-			
-			LocalDate dataCorreta = transacoes.get(0).getData().toLocalDate();
+			LocalDate dataCorreta = transacoes.get(0).getDataDaTransacao();
+			List<LocalDate> dataDaTransacao = transacaoRepository.findByDataDaTransacao();
+			Boolean existeDataRepetida = false;
+			for (int i = 0; i < dataDaTransacao.size(); i++) {
+				if (dataDaTransacao.get(i).isEqual(dataCorreta)) {
+					existeDataRepetida = true;
+					throw new Error("O arquivo desse dia já foi adicionado");
+				}
+			}
+			System.out.println(transacoes.get(0).getDataHoraDaInclusao());
+
 			List<Integer> linhasComDatasDiferentes = new ArrayList<Integer>();
 			int contadorDeLinhas = 0;
 			for (int i = 0; i < transacoes.size(); i++) {
 				contadorDeLinhas++;
-				LocalDate dataComparada = transacoes.get(i).getData().toLocalDate();
+				LocalDate dataComparada = transacoes.get(i).getDataDaTransacao();
 				if (dataCorreta.equals(dataComparada) == false) {
 					contadorDeLinhas++;
 					linhasComDatasDiferentes.add(contadorDeLinhas);
@@ -131,7 +136,9 @@ public class TransacaoController {
 			model.addAttribute("informacoesDoArquivo", informacoesDoArquivo);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			model.addAttribute("erroNoUpload", "O arquivo selecionado está vazio.");
-		} 
+		} catch (Error e) {
+			model.addAttribute("erroNoUpload", "As transações da data deste arquivo já foram adicionadas.");
+		}
 	
 		reader.close();
 		

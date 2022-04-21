@@ -3,6 +3,7 @@ package br.com.diegochueri.inspect.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class Transacao {
 	private String agenciaDeDestino;
 	private String contaDeDestino;
 	private String valor;
-	private LocalDateTime data;
+	private LocalDate dataDaTransacao;
 	private LocalDateTime dataHoraDaInclusao;
 	
 	public static String erroCampoVazio(List<Integer> linhasFaltandoDados) {
@@ -73,11 +74,11 @@ public class Transacao {
 	public void setValor(String record) {
 		this.valor = record;
 	}
-	public LocalDateTime getData() {
-		return data;
+	public LocalDate getDataDaTransacao() {
+		return dataDaTransacao;
 	}
-	public void setData(LocalDateTime record) {
-		this.data = record;
+	public void setDataDaTransacao(LocalDateTime localDate) {
+		this.dataDaTransacao = localDate.toLocalDate();;
 	}
 
 	public LocalDateTime getDataHoraDaInclusao() {
