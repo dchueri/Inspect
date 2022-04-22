@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,8 +50,20 @@ public class TransacaoController {
 	
 	@GetMapping("/historico")
 	public String historico(Model model){	
-		List<Transacao> transacoes = transacaoRepository.findAll(Sort.by("dataDaTransacao"));
-		model.addAttribute("transacoes", transacoes);
+		List<Transacao> transacoes = transacaoRepository.findAll();
+		List<LocalDate> dataDaTransacao = transacaoRepository.findByDataDaTransacao();
+		
+		List<Transacao> objetosComDatasCorretas = new ArrayList<Transacao>();
+		List<LocalDate> datasDiferentes = new ArrayList<LocalDate>();
+		for (int i = 0; i < transacoes.size(); i++) {
+			LocalDate data = dataDaTransacao.get(i);
+			if (!datasDiferentes.contains(data)) {
+				datasDiferentes.add(data);
+				objetosComDatasCorretas.add(transacoes.get(i));
+			}
+		}
+		Collections.sort(objetosComDatasCorretas, Collections.reverseOrder());
+		model.addAttribute("objetosComDatasCorretas", objetosComDatasCorretas);
 		return "historico";
 	}
 	
@@ -114,7 +127,14 @@ public class TransacaoController {
 					throw new Error("O arquivo desse dia já foi adicionado");
 				}
 			}
-			System.out.println(transacoes.get(0).getDataHoraDaInclusao());
+			List<LocalDate> datasDiferentes = new ArrayList();
+			for (int i = 0; i < dataDaTransacao.size(); i++) {
+				LocalDate data = dataDaTransacao.get(i);
+				if (!datasDiferentes.contains(data)) {
+					datasDiferentes.add(data);
+				}
+			}
+			System.out.println(datasDiferentes + "" + dataDaTransacao);
 
 			List<Integer> linhasComDatasDiferentes = new ArrayList<Integer>();
 			int contadorDeLinhas = 0;

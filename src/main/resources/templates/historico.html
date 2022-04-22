@@ -27,17 +27,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="transacao : ${transacoes}">
+          <tr th:each="objetoComDataCorreta : ${objetosComDatasCorretas}">
             <td>
               <span
-                th:text="${#temporals.format(transacao.dataDaTransacao, 'dd/MM/yyyy')}"
+                th:text="${#temporals.format(objetoComDataCorreta.dataDaTransacao, 'dd/MM/yyyy')}"
               >
                 DATA TRANSAÇÕES
               </span>
             </td>
             <td>
               <span
-                th:text="${#temporals.format(transacao.dataHoraDaInclusao, 'dd-MM-yyyy - HH:mm:ss')}"
+                th:text="${#temporals.format(objetoComDataCorreta.dataHoraDaInclusao, 'dd-MM-yyyy - HH:mm:ss')}"
               >
                 DATA IMPORTAÇÃO
               </span>

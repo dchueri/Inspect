@@ -9,7 +9,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-public class Transacao {
+public class Transacao implements Comparable<Transacao> {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -87,6 +87,10 @@ public class Transacao {
 
 	public void setDataHoraDaInclusao(LocalDateTime dataHoraDaInclusao) {
 		this.dataHoraDaInclusao = dataHoraDaInclusao;
+	}
+	
+	public int compareTo(Transacao transacao) {
+		return this.getDataDaTransacao().compareTo(transacao.dataDaTransacao);
 	}
 
 
