@@ -48,7 +48,7 @@ public class TransacaoController {
 	@Autowired
 	private TransacaoRepository transacaoRepository;
 	
-	@GetMapping("/historico")
+	@GetMapping("/importacoes")
 	public String historico(Model model){	
 		List<Transacao> transacoes = transacaoRepository.findAll();
 		List<LocalDate> dataDaTransacao = transacaoRepository.findByDataDaTransacao();
@@ -64,17 +64,17 @@ public class TransacaoController {
 		}
 		Collections.sort(objetosComDatasCorretas, Collections.reverseOrder());
 		model.addAttribute("objetosComDatasCorretas", objetosComDatasCorretas);
-		return "historico";
+		return "importacoes";
 	}
 	
-	@GetMapping("/formulario")
+	@GetMapping("/home")
 	public String upload(Model model){	
 		List<Transacao> transacoes = transacaoRepository.findAll();
 		model.addAttribute("transacoes", transacoes);
 		return "home";
 	}
 	
-	@PostMapping("/formulario")
+	@PostMapping("/importarArquivo")
     public String uploadFile(@RequestParam("arquivo") MultipartFile file, Model model) throws IOException, CsvValidationException, NumberFormatException{
 		String upload = "D:\\Users\\diego\\eclipse-workspace\\inspect\\src\\main\\resources\\uploads\\";
 		File arquivo = new File(file.getOriginalFilename());
