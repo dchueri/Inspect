@@ -1,0 +1,93 @@
+<html>
+  <head th:replace="~{menu :: head}"></head>
+  <div th:replace="~{menu :: menu}"></div>
+
+  <body
+    style="
+      text-align: center;
+      display: grid;
+      justify-content: center;
+      align-items: top;
+    "
+  >
+  <div class="container">
+	<h1 style="text-align: center">DETALHES DA IMPORTAÇÃO</h1>
+	<div>
+	  <form th:each="detalhe : ${detalhes}">
+		<fieldset disabled="disabled">
+		  <div class="col">
+			<label for="ImportadoEm" class="form-label">Importado em</label>
+			<input
+			  type="text"
+			  th:value="${#temporals.format(detalhe.dataHoraDaInclusao, 'dd-MM-yyyy HH:mm:ss')}"
+			  id="ImportadoEm"
+			  class="form-control"
+			/>
+			<!-- <input type="text" id="ImportadoEm" class="form-control" > -->
+		  </div>
+		  <label for="ImportadoPor" class="form-label">Importado por</label>
+		  <input
+			type="text"
+			th:value="${detalhe.user.nome}"
+			id="ImportadoPor"
+			class="form-control"
+		  />
+		  <!-- <input type="text"  id="ImportadoPor" class="form-control"> -->
+		  <label for="DataTrasacao" class="form-label">Data transações</label>
+		  <input
+			type="text"
+			th:value="${detalhe.dataDaTransacao}"
+			id="DataTrasacao"
+			class="form-control"
+		  />
+		  <!-- <input type="text" id="DataTrasacao" class="form-control"> -->
+		</fieldset>
+	  </form>
+	</div>
+
+	<h2 style="text-align: center" class="mt-2">TRANSAÇÕES IMPORTADAS</h2>
+  </div>
+  <div class="container">
+	<table class="table table-striped table-bordered">
+	  <thead>
+		<tr>
+		  <th style="text-align: center" colspan="3" scope="col">ORIGEM</th>
+		  <th style="text-align: center" colspan="3" scope="col">DESTINO</th>
+		  <th
+			rowspan="2"
+			scope="col"
+			class="align-middle"
+			style="text-align: center"
+		  >
+			VALOR
+		  </th>
+		</tr>
+		<tr>
+		  <th scope="col">BANCO</th>
+		  <th scope="col">AGENCIA</th>
+		  <th scope="col">CONTA</th>
+		  <th scope="col">BANCO</th>
+		  <th scope="col">AGENCIA</th>
+		  <th scope="col">CONTA</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr th:each="transacao : ${importacoes}">
+		  <td><span th:text="${transacao.bancoDeOrigem}">banco</span></td>
+		  <td><span th:text="${transacao.agenciaDeOrigem}">agencia</span></td>
+		  <td><span th:text="${transacao.contaDeOrigem}">conta</span></td>
+		  <td><span th:text="${transacao.bancoDeDestino}">banco</span></td>
+		  <td><span th:text="${transacao.agenciaDeDestino}">agencia</span></td>
+		  <td><span th:text="${transacao.contaDeDestino}">conta</span></td>
+		  <td>
+			<span
+			  th:text="${'R$ '+#numbers.formatDecimal(transacao.valor,3,'POINT',2,'COMMA')}"
+			  >valor</span
+			>
+		  </td>
+		</tr>
+	  </tbody>
+	</table>
+  </div>
+  </body>
+</html>

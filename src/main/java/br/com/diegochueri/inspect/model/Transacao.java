@@ -23,7 +23,17 @@ public class Transacao implements Comparable<Transacao> {
 	private String valor;
 	private LocalDate dataDaTransacao;
 	private LocalDateTime dataHoraDaInclusao;
+	@ManyToOne
+	private Users user;
 	
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
 	public static String erroCampoVazio(List<Integer> linhasFaltandoDados) {
 		return ("As linhas " + linhasFaltandoDados + " não foram adicionadas por estarem campos incompletos.");
 	}
@@ -92,6 +102,10 @@ public class Transacao implements Comparable<Transacao> {
 	public int compareTo(Transacao transacao) {
 		return this.getDataDaTransacao().compareTo(transacao.dataDaTransacao);
 	}
+
+    public Object getId() {
+        return id;
+    }
 
 
 }

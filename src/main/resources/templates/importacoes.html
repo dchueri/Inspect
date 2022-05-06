@@ -1,7 +1,7 @@
 <html>
   <head th:replace="~{menu :: head}"></head>
   <body style="text-align: center; display: grid; justify-content: center">
-  <div th:replace="~{menu :: menu}"></div>
+    <div th:replace="~{menu :: menu}"></div>
     <div>
       <h1 style="padding: 1em">IMPORTAÇÕES REALIZADAS</h1>
     </div>
@@ -11,6 +11,7 @@
           <tr>
             <th scope="col">DATA TRANSAÇÕES</th>
             <th scope="col">DATA IMPORTAÇÃO</th>
+            <th scope="col">OPÇÕES</th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +29,22 @@
               >
                 DATA IMPORTAÇÃO
               </span>
+            </td>
+            <td>
+              <form
+                method="POST"
+                th:object="${objetoComDataCorreta}"
+                th:action="@{/importacoes/detalhar}"
+              >
+                <button
+                  th:value="${objetoComDataCorreta.dataDaTransacao}"
+                  th:name="data"
+                  type="submit"
+                  class="btn btn-info"
+                >
+                  Detalhar
+                </button>
+              </form>
             </td>
           </tr>
         </tbody>

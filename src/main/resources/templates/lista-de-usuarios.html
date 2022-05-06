@@ -1,0 +1,64 @@
+<html>
+  <head th:replace="~{menu :: head}" />
+  <div th:replace="~{menu :: menu}" />
+  <body>
+    <div class="container">
+      <h1 style="text-align: center">USUÁRIOS CADASTRADOS</h1>
+      <a href="/usuario/registro"
+        ><button class="btn btn-primary mb-2" type="submit">Novo</button></a
+      >
+      <div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">NOME</th>
+              <th scope="col">EMAIL</th>
+              <th scope="col">OPÇÕES</th>
+            </tr>
+          </thead>
+          <tbody th:each="usuario : ${usuarios}">
+            <tr>
+              <td><span th:text="${usuario.id}" th:value="id">ID</span></td>
+              <td><span th:text="${usuario.nome}">NOME</span></td>
+              <td><span th:text="${usuario.email}">EMAIL</span></td>
+              <td>
+                <div class="btn-group">
+                  <form
+                    method="POST"
+                    th:object="${usuario}"
+                    th:action="@{/usuario/editar}"
+                  >
+                    <a href="/usuario/editar"
+                      ><button
+                        th:value="${usuario.email}"
+                        th:name="email"
+                        type="submit"
+                        class="btn btn-info me-1"
+                      >
+                        Editar
+                      </button></a
+                    >
+                  </form>
+                  <form
+                    method="POST"
+                    th:object="${usuario}"
+                    th:action="@{/usuario/deleta-usuario/{email}(email=${usuario.email})}"
+                  >
+                    <button
+                      type="submit"
+                      class="btn btn-danger"
+                      onClick="confirm('Confirma?')"
+                    >
+                      Remover
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

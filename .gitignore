@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .csv
+.properties
 
 ### STS ###
 .apt_generated

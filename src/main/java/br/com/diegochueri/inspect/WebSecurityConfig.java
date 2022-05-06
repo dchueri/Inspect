@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().authenticated().and()
+		http.authorizeRequests().antMatchers("/usuario/**").permitAll().anyRequest().authenticated().and()
 				.formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/home", true).permitAll())
 				.logout(logout -> logout.logoutUrl("/logout"));
 	}
@@ -31,13 +31,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
 		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(encoder);
-	}
-
-	public UserDetailsService criaUsuario(String nome, String senha, String role) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		UserDetails user = User.builder().username(nome).password(encoder.encode(senha)).roles(role).build();
-		return new InMemoryUserDetailsManager(user);
 	}
 }

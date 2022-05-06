@@ -1,0 +1,30 @@
+<html>
+
+<head th:replace="~{menu :: head}"></head>
+<div th:replace="~{menu :: menu}"></div>
+
+<body>
+    <div class="container" >
+    <div>
+        <h1 style="text-align: center;" >CADASTRAR USUARIO</h1>
+    </div>
+    <form method="POST" th:object="${emailService}" th:action="@{/mail/send}">
+        <div class="mb-3" >
+            <label for="nome" >Nome</label>
+            <input type="text" class="form-control"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="nome">
+        </div>
+        <div class="mb-3">
+            <label for="email" >Email</label>
+            <input  type="email" class="form-control"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="email">
+        </div>        <div class="mb-3">
+            <label for="senha" >Senha</label>
+            <input  type="password" class="form-control"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="senha">
+        </div>
+        <div class="col">
+            <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Cadastrar</button>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>
