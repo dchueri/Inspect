@@ -46,9 +46,8 @@ O projeto está disponível no link:
 * `MariaDB`
 
 ## 🖇️ Contribuidores
-<a href="https://github.com/facebook/docusaurus/graphs/contributors"><img src="https://opencollective.com/Docusaurus/contributors.svg?width=890&button=false" /></a>
 
-Por favor, leia o [COLABORACAO.md](https://gist.github.com/usuario/linkParaInfoSobreContribuicoes) para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
+Seja o primeiro a contribuir!
 
 ## 📌 Versão
 
