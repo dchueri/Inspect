@@ -1,42 +1,26 @@
 package br.com.diegochueri.inspect.service;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.ui.Model;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.diegochueri.inspect.model.Transacao;
 import br.com.diegochueri.inspect.model.Users;
 import br.com.diegochueri.inspect.repository.TransacaoRepository;
 
-public class TransacaoService {
-	public static MultipartFile importarArquivo(MultipartFile file) throws IllegalStateException, IOException {
-		String pastaDoUpload = "D:\\Users\\diego\\eclipse-workspace\\inspect\\src\\main\\resources\\uploads\\";
-		File nomeDoArquivo = new File(file.getOriginalFilename());
+public class LeitorCSV {
 
-		file.transferTo(new File(pastaDoUpload + nomeDoArquivo));
-		return file;
-	}
-
-	public static String informacoesDoArquivo(MultipartFile file) {
-		BigDecimal tamanhoDoArquivo = new BigDecimal(file.getSize()).divide(new BigDecimal("1000000"));
-		return ("Carregado com sucesso: "
-				+ "Arquivo: " + file.getOriginalFilename() + " Tamanho: " + tamanhoDoArquivo + " Mb");
-
-	}
-
-	public static void cadastraAsTransacoesDoArquivo(MultipartFile file, String path, Model model, TransacaoRepository transacaoRepository, String informacoesDoArquivo, Users user)
-			throws CsvValidationException, IOException {
+	public static void read(MultipartFile file, String path, Model model, TransacaoRepository transacaoRepository, String informacoesDoArquivo, Users user)
+    throws CsvValidationException, IOException{
+			
 		CSVReader reader = new CSVReader(new FileReader(path));
 		List<Transacao> transacoes = new ArrayList<Transacao>();
 		int contador = 0;
@@ -48,17 +32,7 @@ public class TransacaoService {
 
 			while ((record = reader.readNext()) != null) {
 				informacoesCompletas = true;
-				Transacao transacao = new Transacao(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7], user);;
-				transacao.setBancoDeOrigem(record[0]);
-				transacao.setAgenciaDeOrigem(record[1]);
-				transacao.setContaDeOrigem(record[2]);
-				transacao.setBancoDeDestino(record[3]);
-				transacao.setAgenciaDeDestino(record[4]);
-				transacao.setContaDeDestino(record[5]);
-				transacao.setValor(record[6]);
-				transacao.setDataDaTransacao(LocalDateTime.parse(record[7]));
-				transacao.setDataHoraDaInclusao(LocalDateTime.now());
-				transacao.setUser(user);
+				Transacao transacao = new Transacao(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7], user);
 				contador++;
 				for (int i = 0; i < 7; i++) {
 					if (record[i].isBlank()) {
@@ -117,4 +91,5 @@ public class TransacaoService {
 
 		reader.close();
 	}
+
 }

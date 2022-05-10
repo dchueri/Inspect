@@ -27,7 +27,7 @@ public class UsuarioController {
 	private static String email;
 	private static String nome;
 
-    public static void setSenha(String senhaRecebida) {
+	public static void setSenha(String senhaRecebida) {
 		senha = senhaRecebida;
 	}
 
@@ -38,49 +38,50 @@ public class UsuarioController {
 	public static void setNome(String nome) {
 		UsuarioController.nome = nome;
 	}
-    
-    @Autowired private JavaMailSender mailSender;
-	
+
+	@Autowired
+	private JavaMailSender mailSender;
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@GetMapping("lista-de-usuarios")
 	public String lista(Model model) {
 		List<Users> usuarios = usuarioRepository.findByNomeNotAndEnabled("Admin", true);
 		model.addAttribute("usuarios", usuarios);
 		return "lista-de-usuarios";
 	}
-	
+
 	@GetMapping("registro")
 	public String cadastro() {
 		return "registro";
 	}
-	
+
 	@PostMapping("cria-usuario")
 	public String criaUsuario(CadastroService cadastro) throws SQLIntegrityConstraintViolationException {
 		Users usuario = cadastro.novo();
 		EmailService emailService = new EmailService();
-	    usuarioRepository.save(usuario);
+		usuarioRepository.save(usuario);
 		emailService.enviaEmail(mailSender, senha, email, nome);
 		return "redirect:/home";
 	}
 
-	@PostMapping ("editar") 
-    public String editar(EditarCadastroService cadastro, @RequestParam("email") String email, Model model) {        
-        Users usuario = usuarioRepository.findByEmail(email);
-        model.addAttribute("usuario", usuario);
-        return "editar";
-    }    
-    
-    @PostMapping ("editado") 
-    public String editado(EditarCadastroService cadastro, @RequestParam("email") String email) {        
-        Users usuario = cadastro.editar(email, usuarioRepository);
-        usuarioRepository.save(usuario);
-        return "redirect:/usuario/lista-de-usuarios";
-    }
-	
+	@PostMapping("editar")
+	public String editar(EditarCadastroService cadastro, @RequestParam("email") String email, Model model) {
+		Users usuario = usuarioRepository.findByEmail(email);
+		model.addAttribute("usuario", usuario);
+		return "editar";
+	}
+
+	@PostMapping("editado")
+	public String editado(EditarCadastroService cadastro, @RequestParam("email") String email) {
+		Users usuario = cadastro.editar(email, usuarioRepository);
+		usuarioRepository.save(usuario);
+		return "redirect:/usuario/lista-de-usuarios";
+	}
+
 	@PostMapping("deleta-usuario/{email}")
-	public String deletaUsuario (@PathVariable String email, Principal principal) {
+	public String deletaUsuario(@PathVariable String email, Principal principal) {
 		Users usuarioDeletado = usuarioRepository.findByEmail(email);
 		if (principal.getName().equals(email)) {
 			System.out.println("Mesmo usuario.");

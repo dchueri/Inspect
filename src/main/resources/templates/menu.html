@@ -8,7 +8,7 @@
 	<div th:fragment="menu" class="bg-dark navbar-dark d-inline-block mb-2 p-0 d-flex justify-content-between" style="width: 100vw;height: fit-content;">
 		<ul class="nav">
 			<li class="nav-item">
-				<a class="nav-link text-light" aria-current="page" href="/importacoes">NOVA IMPORTAÇÃO</a>
+				<a class="nav-link text-light" aria-current="page" href="/home">NOVA IMPORTAÇÃO</a>
 				</li>
 			<li class="nav-item">
 			<a class="nav-link text-light" aria-current="page" href="/importacoes">IMPORTAÇÕES</a>
@@ -16,28 +16,12 @@
 			<li class="nav-item">
 			<a class="nav-link text-light" href="/usuario/lista-de-usuarios">USUÁRIOS</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link text-light" href="/analise">ANÁLISE DE TRANSAÇÕES</a>
+				</li>
 		</ul>
 		<a class="nav-link" sec:authorize="!isAuthenticated()" href="/login" style="width: 60vw;text-align-last: end;">Login</a>
 		<a onClick="document.getElementById('form-login').submit()" class="nav-link" sec:authorize="isAuthenticated()" href="#">Logout</a>
 		<form id="form-login" th:action="@{/logout}" method="post"></form>
 	</div>
 </nav>
-<!-- <nav th:fragment="menu" class="navbar navbar-expand-lg navbar-light bg-light" >
-	<div class="container-fluid">
-		<a class="navbar-brand">Inspect</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-			aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-				<a class="nav-link active" aria-current="page" href="/home">Início</a>
-				<a class="nav-link" href="/importacoes">Importações</a>
-				<a class="nav-link" href="/usuario/lista-de-usuarios">Usuários</a>
-			</div>
-		</div>
-		<a class="nav-link" sec:authorize="!isAuthenticated()" href="/login">Login</a>
-		<a onClick="document.getElementById('form-login').submit()" class="nav-link" sec:authorize="isAuthenticated()" href="#">Logout</a>
-		<form id="form-login" th:action="@{/logout}" method="post"></form>
-	</div>
-</nav> -->

@@ -10,7 +10,7 @@ public class CadastroService {
 	private String email;
 	private String senha;
 	private Boolean enabled;
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -42,7 +42,7 @@ public class CadastroService {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+
 	public Users novo() {
 		Users usuario = new Users();
 		Authority authority = new Authority();
@@ -58,10 +58,10 @@ public class CadastroService {
 		return usuario;
 	}
 
-	public Users editar(String email, UsuarioRepository usuarioRepository){
-        Users usuario = usuarioRepository.findByEmail(email);
-        usuario.setNome(nome);
-        usuario.setPassword(senha);
-        return usuario;
-    }
+	public Users editar(String email, UsuarioRepository usuarioRepository) {
+		Users usuario = usuarioRepository.findByEmail(email);
+		usuario.setNome(nome);
+		usuario.setPassword(senha);
+		return usuario;
+	}
 }

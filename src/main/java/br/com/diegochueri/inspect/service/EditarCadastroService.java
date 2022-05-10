@@ -11,17 +11,20 @@ public class EditarCadastroService {
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public String getSenha() {
         return senha;
     }
+
     public void setSenha(String senha) {
         this.senha = senha;
     }
 
-    public Users editar(String email, UsuarioRepository usuarioRepository){
+    public Users editar(String email, UsuarioRepository usuarioRepository) {
         Users usuario = usuarioRepository.findByEmail(email);
         usuario.setNome(nome);
         usuario.setPassword(senha);
