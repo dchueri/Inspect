@@ -4,23 +4,19 @@
 
 ## Índice
 
-* [Título e Imagem de capa](#Título-e-Imagem-de-capa)
-* [Badges](#badges)
-* [Índice](#índice)
-* [Descrição do Projeto](#descrição-do-projeto)
-* [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
+* [Descrição](#descrição)
+* [Funcionalidades da Aplicação](#funcionalidades-da-aplicação)
 * [Acesso ao Projeto](#acesso-ao-projeto)
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
-* [Pessoas Contribuidoras](#pessoas-contribuidoras)
+* [Contribuidores](#contribuidores)
 * [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras)
 * [Licença](#licença)
-* [Conclusão](#conclusão)
 
-## 🚀 Descrição do Projeto
+## 🚀 Descrição
 
 Projeto desenvolvido para o Alura Challenge 3 - Back-end. O **Inspect** tem o intuito de realizar a importação de transações bancárias. Sua principal função é realizar a análise das transações para identificar possíveis transações suspeitas.
 
-## 🔨 Funcionalidades do projeto
+## 🔨 Funcionalidades da aplicação
 
 - `Importação de arquivos de transações`: a aplicação suporta o envio de arquivos CSV e XML. Os dados dos arquivos enviados são inseridos automáticamente ao banco de dados.
 - `Listagem de importações realizadas`: o usuário pode visualizar as importações que já foram feitas.
@@ -32,7 +28,7 @@ Projeto desenvolvido para o Alura Challenge 3 - Back-end. O **Inspect** tem o in
 - `Detalhamento das importações`: é possível visualizar os detalhes de uma importação realizada. Exibindo dados como: usuário que realizou a importação; data que o arquivo foi importado; data de realização das transações e detalhar cada transação importada pelo arquivo. 
 ![Imagem de exemplo](https://i.imgur.com/63zTAH2.png)
 - `Análise das transações do mês`: na página de Análise o usuário escolherá um mês e ano para ser analizado. Será retornado na tela um relátorio das atividades suspeitas encontradas.
-- ![Imagem de exemplo](https://i.imgur.com/500x5Tc.png)
+![Imagem de exemplo](https://i.imgur.com/500x5Tc.png)
 
 ## 📁 Acesso ao projeto
 
