@@ -30,10 +30,6 @@ Projeto desenvolvido para o Alura Challenge 3 - Back-end. O **Inspect** tem o in
 - `Análise das transações do mês`: na página de Análise o usuário escolherá um mês e ano para ser analizado. Será retornado na tela um relátorio das atividades suspeitas encontradas.
 ![Imagem de exemplo](https://i.imgur.com/500x5Tc.png)
 
-## 📁 Acesso ao projeto
-
-O projeto está disponível no link:
-
 ## 🛠️ Construído com
 
 * `Java 8`
