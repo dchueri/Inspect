@@ -47,7 +47,7 @@ Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as vers�
 
 ## ✒️ Autor
 
-| [<img src="https://avatars.githubusercontent.com/u/84249430?s=400&u=b789830e57ccc23a4d4d758542785461dd656b5f&v=4" width=115><br><sub>Diego  Chueri</sub>](https://github.com/camilafernanda) | 
+| [<img src="https://avatars.githubusercontent.com/u/84249430?s=400&u=b789830e57ccc23a4d4d758542785461dd656b5f&v=4" width=115><br><sub>Diego  Chueri</sub>](https://github.com/dchueri) | 
 | :---: |
 
 ## 📄 Licença
